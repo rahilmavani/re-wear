@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* === Theme color overrides === */
+.text-\[\#8f00ff\], .hover\:text-\[\#8f00ff\]:hover {
+  color: #333333 !important;
+}
+.bg-\[\#8f00ff\], .hover\:bg-\[\#8f00ff\]:hover {
+  background-color: #333333 !important;
+}
+.border-\[\#8f00ff\] {
+  border-color: #333333 !important;
+}
+/* Darker hover variant previously #6f00c4 */
+.bg-\[\#6f00c4\], .hover\:bg-\[\#6f00c4\]:hover {
+  background-color: #1a1a1a !important;
+}
+.text-\[\#6f00c4\], .hover\:text-\[\#6f00c4\]:hover {
+  color: #1a1a1a !important;
+}
+/* Secondary background */
+body {
+  background-color: #F9F9F6;
+}
