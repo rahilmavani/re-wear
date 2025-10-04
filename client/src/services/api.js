@@ -24,21 +24,21 @@ api.interceptors.request.use(
   }
 );
 
-// Add a response interceptor to handle common errors
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // Handle 401 Unauthorized errors (token expired, etc.)
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
+// // Add a response interceptor to handle common errors
+// api.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     // Handle 401 Unauthorized errors (token expired, etc.)
+//     if (error.response && error.response.status === 401) {
+//       localStorage.removeItem('token');
+//       localStorage.removeItem('user');
+//       window.location.href = '/login';
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 // Auth services
 export const authService = {

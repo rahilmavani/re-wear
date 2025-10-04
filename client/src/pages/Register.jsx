@@ -5,9 +5,10 @@ import { Loader } from "lucide-react";
 import { Canvas } from '@react-three/fiber';
 import Shirt from '../components/Shirt';
 import { OrbitControls } from "@react-three/drei";
+import { authService } from "../services/api";
 
 const Register = () => {
-    const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -20,9 +21,13 @@ const Register = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            await axios.post("Backend Link HEre!!!!!!!!!!!!!",  formData, { withCredentials: true });
+            const { data } = await authService.register(formData);    // ⬅️ call your service
+                        // store token + user in localStorage (api.js will attach token automatically)
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("user", JSON.stringify(data.user));
             navigate("/");
         } catch (error) {
+            console.log(error)
             setError(error.response?.data?.message || "Registration failed");
         }
     };
@@ -45,9 +50,9 @@ const Register = () => {
                 <form onSubmit={handleSubmit} className="flex font-mono flex-col gap-3 mt-5">
                     <input
                         type="text"
-                        name="username"
+                        name="name"
                         placeholder="Username"
-                        value={formData.username}
+                        value={formData.name}
                         onChange={handleChange}
                         className="p-4 w-[450px] border rounded text-2xl"
                         required

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loader } from 'lucide-react'
 import { Canvas } from '@react-three/fiber';
+import { authService } from "../services/api";
 import Shirt from '../components/Shirt';
 import { OrbitControls } from "@react-three/drei";
 
@@ -20,7 +21,10 @@ const Login = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            await axios.post("Backend Link Here!!!!!!!!!!!!!", formData, { withCredentials: true });
+            const { data } = await authService.login(formData); 
+            console.log("logged in")
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
             navigate("/");
         } catch (error) {
             setError(error.response?.data?.message || "Login failed");
